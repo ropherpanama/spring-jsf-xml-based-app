@@ -23,7 +23,7 @@ public class MensajeDAOImpl implements MensajeDAO {
 
 	@SuppressWarnings("unchecked")
 	public List<Mensaje> list() {
-		return sessionFactory.getCurrentSession().createQuery("from Mensaje as m order by m.fecha").list();
+		return sessionFactory.getCurrentSession().createQuery("from Mensaje as m").list();
 	}
 
 	public void remove(Integer id) {

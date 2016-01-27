@@ -5,16 +5,23 @@
 
 	<display-name>spring-jsp-xml-based</display-name>
 
+	<!-- Spring Security Facelets Tag Library -->
+	<context-param>
+		<param-name>javax.faces.FACELETS_LIBRARIES</param-name>
+		<param-value>/WEB-INF/springsecurity.taglib.xml</param-value>
+	</context-param>
+	
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
 			/WEB-INF/app-context.xml
+			/WEB-INF/security-context.xml
 		</param-value>
 	</context-param>
 
 	<context-param>
 		<param-name>primefaces.THEME</param-name>
-		<param-value>flick</param-value>
+		<param-value>delta</param-value>
 	</context-param>
 
 	<session-config>
@@ -37,6 +44,16 @@
 		<!-- <param-value>Production</param-value> -->
 	</context-param>
 
+	<!-- Spring Security -->
+	<filter>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
 	<error-page>
 		<exception-type>javax.faces.application.ViewExpiredException</exception-type>
 		<location>/faces/public/index.xhtml</location>

@@ -11,18 +11,31 @@
 
 	<context:component-scan base-package="com.web.app" />
 
-
 	<!-- Use annotation for configuration -->
 	<context:annotation-config />
 	<context:spring-configured />
 
+	<!-- Beans definitions -->
 	<bean id="Mensaje" class="com.web.app.model.Mensaje" />
+	<bean id="Usuario" class="com.web.app.model.Usuario" />
+	<bean id="Rol" class="com.web.app.model.Rol" />
 
-	<bean id="MensajeServicio" class="com.web.app.services.MensajeServiceImpl">
+	<!-- Services definitions -->
+	<bean id="MensajeServicio" class="com.web.app.services.MensajeServicioImpl">
 		<property name="mensajeDAO" ref="MensajeDAO" />
 	</bean>
+	<bean id="UsuarioServicio" class="com.web.app.services.UsuarioServicioImpl">
+		<property name="usuarioDAO" ref="UsuarioDAO" />
+	</bean>
+	<bean id="authenticationService" class="com.web.app.services.AuthenticationService">
+		<property name="usuarioDAO" ref="UsuarioDAO" />
+	</bean>
 
+	<!-- DAO's definitions -->
 	<bean id="MensajeDAO" class="com.web.app.dao.MensajeDAOImpl">
+		<property name="sessionFactory" ref="SessionFactory" />
+	</bean>
+	<bean id="UsuarioDAO" class="com.web.app.dao.UsuarioDAOImpl">
 		<property name="sessionFactory" ref="SessionFactory" />
 	</bean>
 
@@ -30,7 +43,8 @@
 	<bean id="propertyConfigurer"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="location">
-			<value>file:d:/Dropbox/Java EE Practices/connection.properties</value>
+			<value>file:d:/Dropbox/Java EE Practices/connection.properties
+			</value>
 		</property>
 	</bean>
 

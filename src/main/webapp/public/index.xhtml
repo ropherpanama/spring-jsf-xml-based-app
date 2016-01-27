@@ -1,28 +1,31 @@
-<html xmlns="http://www.w3.org/1999/xhtml"
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
-	
+
 <h:head>
 	<title>spring-jsf-xml-based</title>
 </h:head>
 
 <h:body>
+
 	<h:form>
 		<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
-		<p:outputLabel><h3>Login</h3></p:outputLabel>
-		<p:outputLabel value="Username" />
-		<p:inputText id="username" value="#{loginManagedBean.username}"></p:inputText>
-		<h:message for="username"></h:message>
-		<br />
-		<br />
 
-		<p:outputLabel value="Password" />
-		<p:inputMask id="password" value="#{loginManagedBean.password}"></p:inputMask>
-		<br />
-		<br />
+		<p:panel id="login" header="Login" footer="made with Primefaces">
+			<h:panelGrid columns="2" cellpadding="5">
 
-		<h:commandButton action="#{loginManagedBean.validateUser}" value="Login"></h:commandButton>
+				<h:outputText value="Username" for="username" />
+				<p:inputText id="username" value="#{LoginBean.username}"></p:inputText>
+
+				<h:outputText value="Password" for="password" />
+				<p:password id="password" value="#{LoginBean.password}"></p:password>
+
+				<p:commandButton action="#{LoginBean.login}" value="Login" ajax="true"></p:commandButton>
+
+			</h:panelGrid>
+		</p:panel>
 	</h:form>
+
 </h:body>
 </html>

@@ -1,6 +1,7 @@
 package com.web.app.managed.beans;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -8,21 +9,25 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
+import com.web.app.managed.tablecolumns.MensajeTableColumn;
 import com.web.app.model.Mensaje;
 import com.web.app.services.MensajeServicio;
 
-@ManagedBean
+@ManagedBean(name = "msgBean")
 @SessionScoped
 public class DashboardManagedBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@ManagedProperty(value = "#{MensajeServicio}")
 	MensajeServicio servicio;
 	private List<Mensaje> mensajes;
+	private List<MensajeTableColumn> dataTableColumns = new ArrayList<MensajeTableColumn>();
 
 	@PostConstruct
 	public void init() {
-//		mensajes = new ArrayList<Mensaje>();
 		mensajes = servicio.list();
+		dataTableColumns.add(new MensajeTableColumn("Id", "mensajeId"));
+		dataTableColumns.add(new MensajeTableColumn("Texto", "texto"));
+		dataTableColumns.add(new MensajeTableColumn("Fecha", "fecha"));
 	}
 
 	public MensajeServicio getServicio() {
@@ -37,7 +42,7 @@ public class DashboardManagedBean implements Serializable {
 		return mensajes;
 	}
 
-	public void setMensajes(List<Mensaje> mensajes) {
-		this.mensajes = mensajes;
+	public List<MensajeTableColumn> getDataTableColumns() {
+		return dataTableColumns;
 	}
 }

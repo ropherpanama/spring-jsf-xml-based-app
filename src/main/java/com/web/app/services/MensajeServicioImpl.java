@@ -8,7 +8,7 @@ import com.web.app.dao.MensajeDAO;
 import com.web.app.model.Mensaje;
 
 @Transactional(readOnly = true)
-public class MensajeServiceImpl implements MensajeServicio {
+public class MensajeServicioImpl implements MensajeServicio {
 
 	private MensajeDAO mensajeDAO;
 

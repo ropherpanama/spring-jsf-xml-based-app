@@ -3,14 +3,30 @@ package com.web.app.managed.beans;
 import java.io.Serializable;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
-@ManagedBean
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.context.SecurityContextHolder;
+
+import com.web.app.services.UsuarioServicio;
+
+@ManagedBean(name = "LoginBean")
 @SessionScoped
 public class LoginManagedBean extends AncestralManagedBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private String username;
 	private String password;
+	
+	@ManagedProperty(value = "#{UsuarioServicio}")
+	UsuarioServicio servicio;
+	
+	@ManagedProperty(value="#{authenticationManager}")
+    private AuthenticationManager authenticationManager = null;
 
 	public String getUsername() {
 		return username;
@@ -28,13 +44,37 @@ public class LoginManagedBean extends AncestralManagedBean implements Serializab
 		this.password = password;
 	}
 	
-	public String validateUser() {
-		if(username.equals("rosendo"))
-			return "welcome";
-		else {
-			addWarnMessage("Oops!", "Combinacion username/password incorrecta");
-			return "goout";
-		}
+	public AuthenticationManager getAuthenticationManager() {
+		return authenticationManager;
 	}
 
+	public void setAuthenticationManager(AuthenticationManager authenticationManager) {
+		this.authenticationManager = authenticationManager;
+	}
+	
+	public String login() {
+		try {
+            if(username.length() > 0 && password.length() > 0) {
+            	Authentication request = new UsernamePasswordAuthenticationToken(username, password);
+                Authentication result = authenticationManager.authenticate(request);
+                SecurityContextHolder.getContext().setAuthentication(result);
+                return "welcome";
+            }else {
+            	addWarnMessage("Hey!", "Tienes cuenta de usuario?");
+            	return "goout";
+            } 
+        } catch (AuthenticationException e) {
+            if(e instanceof BadCredentialsException)
+            	addWarnMessage("Oops!", "Combinacion username/password incorrecta");
+            return "goout";
+        }
+	}
+
+	public UsuarioServicio getServicio() {
+		return servicio;
+	}
+
+	public void setServicio(UsuarioServicio servicio) {
+		this.servicio = servicio;
+	}
 }
