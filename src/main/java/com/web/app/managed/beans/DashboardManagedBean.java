@@ -13,7 +13,7 @@ import com.web.app.managed.tablecolumns.MensajeTableColumn;
 import com.web.app.model.Mensaje;
 import com.web.app.services.MensajeServicio;
 
-@ManagedBean(name = "msgBean")
+@ManagedBean(name = "mbDashboard")
 @SessionScoped
 public class DashboardManagedBean implements Serializable {
 	private static final long serialVersionUID = 1L;

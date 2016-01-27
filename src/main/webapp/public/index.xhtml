@@ -16,12 +16,12 @@
 			<h:panelGrid columns="2" cellpadding="5">
 
 				<h:outputText value="Username" for="username" />
-				<p:inputText id="username" value="#{LoginBean.username}"></p:inputText>
+				<p:inputText id="username" value="#{mbLogin.username}"></p:inputText>
 
 				<h:outputText value="Password" for="password" />
-				<p:password id="password" value="#{LoginBean.password}"></p:password>
+				<p:password id="password" value="#{mbLogin.password}"></p:password>
 
-				<p:commandButton action="#{LoginBean.login}" value="Login" ajax="true"></p:commandButton>
+				<p:commandButton action="#{mbLogin.login}" value="Login" ajax="true"></p:commandButton>
 
 			</h:panelGrid>
 		</p:panel>

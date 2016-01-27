@@ -15,7 +15,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.web.app.services.UsuarioServicio;
 
-@ManagedBean(name = "LoginBean")
+@ManagedBean(name = "mbLogin")
 @SessionScoped
 public class LoginManagedBean extends AncestralManagedBean implements Serializable {
 	private static final long serialVersionUID = 1L;

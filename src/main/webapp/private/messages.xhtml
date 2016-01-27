@@ -13,9 +13,9 @@
 	<h:form>
 		<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
 		<p:panel id="mensajes" header="Mensajes" >
-		<p:dataTable value="#{msgBean.mensajes}" var="mensaje" paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+		<p:dataTable value="#{mbDashboard.mensajes}" var="mensaje" paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 				rowsPerPageTemplate="5,10,15" rows="5">
-			<p:columns value="#{msgBean.dataTableColumns}" var="column"
+			<p:columns value="#{mbDashboard.dataTableColumns}" var="column"
 				sortBy="#{mensaje[column.property]}">
 				<f:facet name="header">
 					<h:outputText value="#{column.header}" />
